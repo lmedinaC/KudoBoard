@@ -1,0 +1,13 @@
+/node_modules
+/public/hot
+/public/storage
+/public/js
+/public/css
+/storage/*.key
+/vendor
+.env
+
+deploy.sh
+nbproject
+.directory
+_ide_helper.php
