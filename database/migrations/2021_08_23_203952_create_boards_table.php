@@ -18,7 +18,7 @@ class CreateBoardsTable extends Migration
             $table->longText('description');
             $table->date('start_date')->nullable();  
             $table->date('end_date')->nullable();  
-            $table->integer('num_max_guest')->nullable();
+            $table->integer('num_max_guest')->default('10');
 
             //* foreign key
             $table->unsignedInteger('owner_id');

@@ -5,10 +5,18 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
 
 export default {
     name: "IndexComponent",
-   
+    methods: {
+        ...mapActions(["getBoards","getPermissionsBoard"]),
+
+    },
+    created(){
+        this.getBoards();
+        this.getPermissionsBoard();
+    }
 };
 </script>
 

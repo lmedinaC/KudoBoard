@@ -21,3 +21,29 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+/*
+*  Worker Routes
+*
+*/
+Route::prefix('worker')->group(function (){
+    //Return a list of all workers
+    Route::get('/store', 'WorkerController@getAll')->name('worker.store');
+});
+
+/*
+*  Board Routes
+*
+*/
+Route::prefix('board')->group(function (){
+    //Return a list of all boards
+    Route::get('/store', 'BoardController@getAll')->name('board.store');
+    //Return a board
+    Route::get('/show/{board_id}', 'BoardController@show')->name('board.show');
+    //Return permissions board
+    Route::post('/permissions/{board_id}', 'BoardController@permissions')->name('board.permissions');
+    //Create a board
+    Route::post('/create', 'BoardController@create')->name('board.create');
+    //Update a board
+    Route::put('/update/{board_id}', 'BoardController@update')->name('board.update');
+    
+});

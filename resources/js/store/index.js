@@ -21,6 +21,38 @@ export default new Vuex.Store({
     },
 
     actions: {
+        getBoards({ commit, dispatch }) {
+            return axios
+                .post("/board/create", {
+                    "description": "Feliz cumple asd amigos",
+                    "workers": [1, 2, 3]
 
+                })
+                .then(response => {
+                    console.log(response);
+
+
+                    return Promise.resolve(true);
+                })
+                .catch(function(error) {
+                    console.log(error);
+                    return Promise.resolve(false);
+                });
+        },
+
+        getPermissionsBoard({ commit, dispatch }) {
+            return axios
+                .post("/board/permissions/4", {})
+                .then(response => {
+                    console.log(response);
+
+
+                    return Promise.resolve(true);
+                })
+                .catch(function(error) {
+                    console.log(error);
+                    return Promise.resolve(false);
+                });
+        },
     }
 });
