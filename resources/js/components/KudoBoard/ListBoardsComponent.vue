@@ -1,5 +1,12 @@
 <template>
     <div>
+        <loader :dialog="loader" />
+        <alert
+            :dialog="alert.dialog"
+            :tipo="alert.tipo"
+            :mensaje="alert.mensaje"
+            @close="alert.dialog = false"
+        />
         <v-row>
             <v-col v-for="(e, i) in listBoard" :key="i" cols="12" sm="4">
                 <v-card elevation="2">
@@ -11,7 +18,11 @@
                                 </p>
                             </v-col>
                             <v-col cols="4" class="d-flex justify-end">
-                                <v-btn @click="openBoard(e)" dark depressed color="blue"
+                                <v-btn
+                                    @click="openBoard(e)"
+                                    dark
+                                    depressed
+                                    color="blue"
                                     ><v-icon small class="mr-2"
                                         >mdi-bulletin-board</v-icon
                                     >View</v-btn
@@ -115,11 +126,20 @@
 
 <script>
 import { mapActions, mapGetters } from "vuex";
+import Alert from "../Helpers/alert.vue";
+import Loader from "../Helpers/loader.vue";
 
 export default {
     name: "ListBoardsComponent",
+    components: { Loader, Alert },
     data() {
         return {
+            loader: false,
+            alert: {
+                dialog: false,
+                tipo: "success",
+                mensaje: "asd"
+            },
             colors: [
                 { hex: "#c91162" },
                 { hex: "#4f3947" },
@@ -130,7 +150,8 @@ export default {
         };
     },
     methods: {
-        ...mapActions(["changeAdminComponent"]),
+        ...mapActions(["changeAdminComponent", "getPermissionsBoard"]),
+
         recipientsView(params) {
             params.recipentsView = [];
             for (let i = 0; i < 2; i++) {
@@ -138,31 +159,49 @@ export default {
                     params.recipentsView.push(params.recipients[i]);
             }
         },
+
         allRecipientsView(params) {
             params.recipentsView = [];
             params.recipients.forEach(e => {
                 params.recipentsView.push(e);
             });
         },
+
         randomColor() {
             const color = this.colors[
                 Math.floor(Math.random() * this.colors.length)
             ];
             return color.hex;
         },
-        openBoard(params){
-            this.changeAdminComponent("ViewBoardComponent")
+
+        openBoard(params) {
+            this.loader = true;
+            this.getPermissionsBoard(params.id).then(res => {
+                this.loader = false;
+                //console.log(this.workerPermissions);
+                if (
+                    this.workerPermissions.is_guest == false &&
+                    this.workerPermissions.is_owner == false &&
+                    this.workerPermissions.is_recipient == false
+                ) {
+                    this.alert.tipo = "warning";
+                    this.alert.mensaje =
+                        "You don´t have permissions to this boards";
+                    this.alert.dialog = true;
+                } else {
+                    this.changeAdminComponent("ViewBoardComponent");
+                }
+            });
         }
     },
     computed: {
         ...mapGetters({
-            listBoard: "GET_LIST_BOARDS"
+            listBoard: "GET_LIST_BOARDS",
+            workerPermissions: "GET_LIST_PERMISSIONS"
         })
     },
     created() {}
 };
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>
