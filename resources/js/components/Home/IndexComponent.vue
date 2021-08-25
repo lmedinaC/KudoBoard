@@ -1,29 +1,37 @@
 <template>
-    <v-app>
-       
+    <v-app style="background: #f9f9fa;">
+        <menu-component />
+        <div>
+            <component v-bind:is="component"></component>
+        </div>
+        
     </v-app>
 </template>
 
 <script>
-import { mapActions } from 'vuex';
-
+import { mapActions, mapGetters } from "vuex";
+import ListBoardsComponent from "../KudoBoard/ListBoardsComponent.vue";
+import HomeBoardComponent from "../KudoBoard/HomeBoardComponent.vue"
+import MenuComponent from "./MenuComponent.vue"
+import ViewBoardComponent from "../KudoBoard/ViewBoardComponent.vue"
 export default {
+    components: { ListBoardsComponent,MenuComponent,HomeBoardComponent,ViewBoardComponent },
     name: "IndexComponent",
     methods: {
-        ...mapActions(["getBoards","getPermissionsBoard"]),
-
+        ...mapActions(["getBoards", "getPermissionsBoard"])
     },
-    created(){
+    computed: {
+        ...mapGetters({component: "GET_ADMIN_COMPONENT"})
+    },
+    created() {
         this.getBoards();
-        this.getPermissionsBoard();
+        //this.getPermissionsBoard();
     }
 };
 </script>
 
 <style lang="scss" scoped>
-    .indexComponent{
-        margin: 10px 25px 10px 25px;
-    }
+.indexComponent {
+    margin: 20px 75px 20px 75px;
+}
 </style>
-
-
