@@ -10,6 +10,17 @@ export default new Vuex.Store({
         listBoards: [],
         listWorkers: [],
         listPermission: [],
+        board: null,
+        posts: [],
+        post: {
+            guest_id: 0,
+            post: {
+                id: "",
+                description: "",
+            },
+            worker_id: 0,
+            worker_name: ""
+        }
     },
 
     /*
@@ -44,6 +55,28 @@ export default new Vuex.Store({
             return state.listPermission
         },
 
+        /*
+         * Return KUDO BOARD
+         */
+        GET_BOARD(state) {
+            return state.board
+        },
+
+        /*
+         * Return  KUDO BOARD´s posts
+         */
+        GET_POSTS(state) {
+            return state.posts
+        },
+
+        /*
+         * Return  KUDO BOARD´s post
+         */
+        GET_POST(state) {
+            return state.post
+        },
+
+
 
     },
 
@@ -75,6 +108,28 @@ export default new Vuex.Store({
         SET_LIST_PERMISSIONS(state, payload) {
             state.listPermission = payload
         },
+
+        /*
+         * Set KUDO BOARD
+         */
+        SET_BOARD(state, payload) {
+            state.board = payload
+        },
+
+        /*
+         * Set  KUDO BOARD´s posts
+         */
+        SET_POSTS(state, payload) {
+            state.posts = payload
+        },
+
+        /*
+         * Set  KUDO BOARD´s post
+         */
+        SET_POST(state, payload) {
+            state.post = JSON.parse(JSON.stringify(payload));
+        },
+
     },
 
     actions: {
@@ -111,12 +166,12 @@ export default new Vuex.Store({
                 });
         },
 
-        getWorkers({ commit, dispatch }) {
+        getBoard({ commit, dispatch }, board_id) {
             return axios
-                .get("/worker/store")
+                .get(`/board/show/${board_id}`)
                 .then(response => {
-                    //console.log(response.data.data);
-                    commit('SET_LIST_WORKERS', response.data.data);
+                    //console.log(response);      
+                    commit('SET_BOARD', response.data.data);
                     return Promise.resolve(true);
                 })
                 .catch(function(error) {
@@ -125,12 +180,27 @@ export default new Vuex.Store({
                 });
         },
 
-        createBoard({ commit, dispatch }, form) {
+        getPostsOfBoard({ commit, dispatch }, board_id) {
             return axios
-                .post("/board/create", form)
+                .get(`/publication/show/${board_id}`)
                 .then(response => {
-                    //console.log(response);
-                    return Promise.resolve(response.data);
+                    console.log(response);
+                    commit('SET_POSTS', response.data);
+                    return Promise.resolve(true);
+                })
+                .catch(function(error) {
+                    console.log(error);
+                    return Promise.resolve(false);
+                });
+        },
+
+        getWorkers({ commit, dispatch }) {
+            return axios
+                .get("/worker/store")
+                .then(response => {
+                    //console.log(response.data.data);
+                    commit('SET_LIST_WORKERS', response.data.data);
+                    return Promise.resolve(true);
                 })
                 .catch(function(error) {
                     console.log(error);
@@ -151,5 +221,60 @@ export default new Vuex.Store({
                     return Promise.resolve(false);
                 });
         },
+
+
+        createBoard({ commit, dispatch }, form) {
+            return axios
+                .post("/board/create", form)
+                .then(response => {
+                    //console.log(response);
+                    return Promise.resolve(response.data);
+                })
+                .catch(function(error) {
+                    //console.log(error);
+                    return Promise.resolve(false);
+                });
+        },
+
+        createPost({ commit, dispatch }, form) {
+            return axios
+                .post("/publication/create", form)
+                .then(response => {
+                    //console.log(response);
+                    return Promise.resolve(response.data);
+                })
+                .catch(function(error) {
+                    console.log(error);
+                    return Promise.resolve(false);
+                });
+        },
+
+        editPost({ commit, dispatch }, form) {
+            return axios
+                .put("/publication/update", form)
+                .then(response => {
+                    //console.log(response);
+                    return Promise.resolve(response.data);
+                })
+                .catch(function(error) {
+                    console.log(error);
+                    return Promise.resolve(false);
+                });
+        },
+
+        deletePost({ commit, dispatch }, post_id) {
+            return axios
+                .delete(`/publication/delete/${post_id}`, {})
+                .then(response => {
+                    //console.log(response);
+                    return Promise.resolve(response.data);
+                })
+                .catch(function(error) {
+                    console.log(error);
+                    return Promise.resolve(false);
+                });
+        }
+
+
     }
 });

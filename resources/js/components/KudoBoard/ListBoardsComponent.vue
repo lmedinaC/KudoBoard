@@ -150,7 +150,7 @@ export default {
         };
     },
     methods: {
-        ...mapActions(["changeAdminComponent", "getPermissionsBoard"]),
+        ...mapActions(["changeAdminComponent", "getPermissionsBoard","getBoard"]),
 
         recipientsView(params) {
             params.recipentsView = [];
@@ -178,7 +178,6 @@ export default {
             this.loader = true;
             this.getPermissionsBoard(params.id).then(res => {
                 this.loader = false;
-                //console.log(this.workerPermissions);
                 if (
                     this.workerPermissions.is_guest == false &&
                     this.workerPermissions.is_owner == false &&
@@ -189,7 +188,9 @@ export default {
                         "You don´t have permissions to this boards";
                     this.alert.dialog = true;
                 } else {
-                    this.changeAdminComponent("ViewBoardComponent");
+                    this.getBoard(params.id).then(resp => {
+                         this.changeAdminComponent("ViewBoardComponent");
+                    })
                 }
             });
         }

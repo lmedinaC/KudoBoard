@@ -2,12 +2,12 @@
   <div>
     <v-dialog :value="question" max-width="600px" persistent>
       <v-card >
-        <v-card-title class="headline" style="color:#80122A;">
+        <v-card-title class="headline" style="color:#01579B;">
           {{ title }}
         </v-card-title>
 
         <v-card-text>
-          <div  style="color:#01579B;">
+          <div >
             {{ message }}
           </div>
         </v-card-text>
@@ -15,11 +15,10 @@
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn text  color="primary"  @click="accept">
-            
-            Aceptar
+            Accept
           </v-btn>
           <v-btn text color="#80122A" dark @click="close">
-            Cancelar
+            Cancel
           </v-btn>
         </v-card-actions>
       </v-card>
