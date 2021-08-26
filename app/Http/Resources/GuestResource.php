@@ -2,8 +2,9 @@
 namespace App\Http\Resources;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class RecipientResource extends JsonResource
+class GuestResource extends JsonResource
 {
+
     /**
      * Transform the resource into an array.
      *
@@ -14,8 +15,10 @@ class RecipientResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'worker_id'=> $this->recipient_id,
-            'name' => $this->worker->user->name,
+            'worker_id' => $this->guest_id,
+            'board_id' => $this->board_id,
+            'num_posts' => $this->publications->count(),
+            'worker_name' =>  $this->worker->user->name
         ];
     }
 }

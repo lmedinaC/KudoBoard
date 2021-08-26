@@ -31,6 +31,23 @@ class PublicationController extends Controller
 
             $guest = Guest::where(["guest_id" => $worker->id, "board_id" => $board->id])->first();
 
+            $today = strtotime(date("d-m-Y H:i:00", time()));
+
+            if (!is_null($board->start_date)) {
+                if (strtotime($board->start_date) > $today)
+                    return [
+                        'message' => "Still can't be posted. Start: ".$board->start_date,
+                        'type' => 'warning'
+                    ];
+            }
+            if (!is_null($board->end_date)) {
+                if (strtotime($board->end_date) < $today)
+                    return [
+                        'message' => "Can't longer be posted. Ended: ". $board->end_date,
+                        'type' => 'warning'
+                    ];
+            }
+
             $publication = new Publication;
             $publication->description = $request->description;
             $publication->guest_id = $guest->id;

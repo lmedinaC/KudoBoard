@@ -93,7 +93,7 @@ export default {
         }
     },
     methods: {
-        ...mapActions(["getWorkers", "createBoard", "getBoards"]),
+        ...mapActions(["getWorkers", "createBoard", "getBoards","getRecipientsBoards"]),
 
         close() {
             this.$emit("close");
@@ -114,6 +114,7 @@ export default {
                     this.alert.mensaje = result.message;
                     this.alert.dialog = true;
                     this.getBoards();
+                    this.getRecipientsBoards();
                     this.close();
                 });
             }

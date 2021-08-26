@@ -18,13 +18,13 @@ export default {
     components: { ListBoardsComponent,MenuComponent,HomeBoardComponent,ViewBoardComponent },
     name: "IndexComponent",
     methods: {
-        ...mapActions(["getBoards", "getPermissionsBoard"])
+        ...mapActions(["getPermissionsBoard"])
     },
     computed: {
         ...mapGetters({component: "GET_ADMIN_COMPONENT"})
     },
     created() {
-        this.getBoards();
+        
         //this.getPermissionsBoard();
     }
 };

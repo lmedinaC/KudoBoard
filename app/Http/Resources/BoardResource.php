@@ -25,6 +25,7 @@ class BoardResource extends JsonResource
                 'name'=> $this->worker->user->name
             ],
             'recipients' => RecipientResource::collection($this->recipients),
+            'guests' => GuestResource::collection($this->guests),
         ];
     }
 }

@@ -7,17 +7,20 @@
             :mensaje="alert.mensaje"
             @close="alert.dialog = false"
         />
-        <v-row>
+        <v-alert v-if="listBoard.length == 0" dense outlined type="info">
+                You haven't received a KudoBoard yet.
+        </v-alert>
+        <v-row v-else>
             <v-col v-for="(e, i) in listBoard" :key="i" cols="12" sm="4">
                 <v-card elevation="2">
                     <v-card-text>
                         <v-row>
-                            <v-col cols="8">
+                            <v-col cols="8" md="8">
                                 <p class="text-h6 text--primary">
                                     <strong>{{ e.description }}</strong>
                                 </p>
                             </v-col>
-                            <v-col cols="4" class="d-flex justify-end">
+                            <v-col cols="4" md="4" class="d-flex justify-end">
                                 <v-btn
                                     @click="openBoard(e)"
                                     dark
@@ -64,7 +67,7 @@
 
                             <v-btn
                                 v-if="
-                                    e.recipients.length > 2 &&
+                                    e.recipients.length > 5 &&
                                         e.recipients.length !=
                                             e.recipentsView.length
                                 "
@@ -81,7 +84,7 @@
                             </v-btn>
                             <v-btn
                                 v-if="
-                                    e.recipients.length > 2 &&
+                                    e.recipients.length > 5 &&
                                         e.recipients.length ==
                                             e.recipentsView.length
                                 "
@@ -116,7 +119,7 @@
                                 {{ e.num_max_guest }}
                             </v-col>
                         </v-row>
-                        <v-icon>mdi-android-messages</v-icon> POSTS: 100
+                        <v-icon>mdi-android-messages</v-icon> POSTS: {{e.num_post}}
                     </v-card-text>
                 </v-card>
             </v-col>
@@ -150,11 +153,11 @@ export default {
         };
     },
     methods: {
-        ...mapActions(["changeAdminComponent", "getPermissionsBoard","getBoard"]),
+        ...mapActions(["getBoards","changeAdminComponent", "getPermissionsBoard","getBoard"]),
 
         recipientsView(params) {
             params.recipentsView = [];
-            for (let i = 0; i < 2; i++) {
+            for (let i = 0; i < 5; i++) {
                 if (params.recipients[i] !== undefined)
                     params.recipentsView.push(params.recipients[i]);
             }
@@ -201,7 +204,9 @@ export default {
             workerPermissions: "GET_LIST_PERMISSIONS"
         })
     },
-    created() {}
+    created() {
+        this.getBoards();
+    }
 };
 </script>
 

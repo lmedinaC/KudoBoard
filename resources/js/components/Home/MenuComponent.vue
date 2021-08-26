@@ -12,7 +12,7 @@
                     >Home</span
                 >
                 <span v-if="component != 'HomeBoardComponent'">
-                    / {{ name_board }}</span
+                    / {{ board.description }}</span
                 >
             </v-col>
             <v-col cols="4" class="d-flex justify-end">
@@ -49,7 +49,10 @@ export default {
         ...mapActions(["changeAdminComponent"])
     },
     computed: {
-        ...mapGetters({ component: "GET_ADMIN_COMPONENT" })
+        ...mapGetters({
+            component: "GET_ADMIN_COMPONENT",
+            board: "GET_BOARD"
+        })
     }
 };
 </script>

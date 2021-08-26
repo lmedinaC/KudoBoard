@@ -28,6 +28,22 @@ class BoardController extends Controller
     /**
      * All Boards Getter with custom Data
      */
+    public function getRecipients()
+    {
+        $id = Auth::id();
+        $worker= Worker::where(["user_id"=>$id])->first();
+
+        $boards = Board::whereHas('recipients', function ($query) use ($worker) {
+            return $query->where('recipient_id', '=', $worker->id);
+        })->get();
+
+        $boardsRecipients = BoardResource::collection($boards);
+        return $boardsRecipients;
+    }
+
+    /**
+     *Show a bord with custom data
+     */
     public function show($board_id)
     {
         try {
@@ -101,11 +117,38 @@ class BoardController extends Controller
                     'message' => 'KudoBoard not exist',
                     'type' => 'warning'
                 ];
+            
+            /**
+             * edit board
+             */
             $board->description = $request->description;
             $board->start_date = $request->start_date;
             $board->end_date = $request->end_date;
             $board->num_max_guest = $request->num_max_guest;
             $board->save();
+
+            /**
+             * delete recipients
+             */
+            $recipients_delete= $board->recipients;
+            foreach($recipients_delete as $w){
+                $w->delete();
+            }
+
+            /**
+             * create new recipients
+             */
+
+            $req_workers = $request->workers;
+
+            foreach ($req_workers as $worker_id) {
+
+                $workerRec = Worker::find($worker_id);
+                $recipient = new Recipient;
+                $recipient->recipient_id = $workerRec->id;
+                $recipient->board_id = $board->id;
+                $recipient->save();
+            }
 
 
             return [
@@ -136,7 +179,7 @@ class BoardController extends Controller
             $board->delete();
 
             return [
-                'message' => 'KudoBoard delete successfully',
+                'message' => 'KudoBoard deleted successfully',
                 'type' => 'success'
             ];
         } catch (\Exception $e) {

@@ -1,5 +1,6 @@
 <template>
     <div>
+        <loader :dialog="loader" />
         <new-post-component
             :dialog="modalNewPost"
             @close="modalNewPost = false"
@@ -8,9 +9,14 @@
             :dialog="modalEditPost"
             @close="modalEditPost = false"
         />
-        <settings-board-component 
+        <settings-board-component
             :dialog="modalSettings"
-            @close="modalSettings = false"/>
+            @close="modalSettings = false"
+        />
+        <guests-board-component 
+            :dialog="modalGuest"
+            @close="modalGuest = false"
+        />
 
         <alert
             :dialog="alert.dialog"
@@ -19,12 +25,20 @@
             @close="alert.dialog = false"
         />
 
-        <questioner 
+        <questioner
             :dialog="questioner.dialog"
             :title="questioner.titulo"
             :message="questioner.mensaje"
             @close="questioner.dialog = false"
             @accept="deletePostBoard()"
+        />
+
+        <questioner
+            :dialog="questionerDelete.dialog"
+            :title="questionerDelete.titulo"
+            :message="questionerDelete.mensaje"
+            @close="questionerDelete.dialog = false"
+            @accept="deleteKudoBoard()"
         />
         <div class="header-component">
             <div
@@ -42,6 +56,7 @@
                     <v-tooltip bottom>
                         <template v-slot:activator="{ on, attrs }">
                             <v-btn
+                                @click="modalGuest = true"
                                 fab
                                 x-small
                                 depressed
@@ -77,6 +92,7 @@
                     <v-tooltip bottom>
                         <template v-slot:activator="{ on, attrs }">
                             <v-btn
+                                @click="questionerDelete.dialog = true"
                                 fab
                                 x-small
                                 depressed
@@ -133,7 +149,13 @@
                                     </v-btn>
                                 </template>
                                 <v-list>
-                                    <v-list-item link @click="setPost(element),modalEditPost = true">
+                                    <v-list-item
+                                        link
+                                        @click="
+                                            setPost(element),
+                                                (modalEditPost = true)
+                                        "
+                                    >
                                         <v-list-item-title
                                             ><v-icon color="green"
                                                 >mdi-pencil-outline</v-icon
@@ -167,11 +189,13 @@
 
 <script>
 import { mapActions, mapGetters, mapMutations } from "vuex";
-import EditPostComponent from '../Posts/EditPostComponent.vue';
+import EditPostComponent from "../Posts/EditPostComponent.vue";
 import NewPostComponent from "../Posts/NewPostComponent.vue";
-import SettingsBoardComponent from './SettingsBoardComponent.vue';
-import alert from '../Helpers/alert.vue';
-import Questioner from '../Helpers/questioner.vue';
+import SettingsBoardComponent from "./SettingsBoardComponent.vue";
+import alert from "../Helpers/alert.vue";
+import Questioner from "../Helpers/questioner.vue";
+import Loader from '../Helpers/loader.vue';
+import GuestsBoardComponent from './GuestsBoardComponent.vue';
 export default {
     name: "ViewBoardComponent",
     components: {
@@ -179,13 +203,18 @@ export default {
         SettingsBoardComponent,
         EditPostComponent,
         alert,
-        Questioner
+        Questioner,
+        Loader,
+        GuestsBoardComponent
     },
     data() {
         return {
-            modalEditPost:false,
+            modalGuest: false,
+            modalEditPost: false,
             modalNewPost: false,
-            modalSettings:false,
+            modalSettings: false,
+
+            loader:false,
 
             alert: {
                 dialog: false,
@@ -199,43 +228,68 @@ export default {
                 mensaje: "Do you want delete this post?"
             },
 
-            itemPost : null,
+            questionerDelete: {
+                dialog: false,
+                titulo: "Delete KudoBoard",
+                mensaje: "Do you want delete this KudoBoard?"
+            },
+
+            itemPost: null
         };
     },
     methods: {
-        ...mapActions(["getPostsOfBoard", "deletePost"]),
+        ...mapActions([
+            "getPostsOfBoard",
+            "deletePost",
+            "deleteBoard",
+            "changeAdminComponent",
+            "getGuests"
+        ]),
 
         ...mapMutations({
             setPost: "SET_POST"
         }),
 
-        delt(params){
-            this.itemPost = params
-            this.questioner.dialog = true
+        delt(params) {
+            this.itemPost = params;
+            this.questioner.dialog = true;
         },
 
-        deletePostBoard(){
-            this.deletePost(this.itemPost.post.id).then(res=>{
-                this.questioner.dialog = false
+        deletePostBoard() {
+            this.deletePost(this.itemPost.post.id).then(res => {
+                this.questioner.dialog = false;
                 this.alert.tipo = res.type;
                 this.alert.mensaje = res.message;
                 this.alert.dialog = true;
-                 this.getPostsOfBoard(this.board.id);
+                this.getPostsOfBoard(this.board.id);
                 console.log(res);
-            })  
+            });
+        },
+
+        deleteKudoBoard() {
+            this.deleteBoard(this.board.id).then(res => {
+                this.questionerDelete.dialog = false;
+                this.alert.tipo = res.type;
+                this.alert.mensaje = res.message;
+                this.alert.dialog = true;
+                this.loader = true
+                setTimeout(() => {
+                    this.loader = false
+                    this.changeAdminComponent("HomeBoardComponent");
+                }, 2000);
+            });
         }
-
-
     },
     computed: {
         ...mapGetters({
             workerPermissions: "GET_LIST_PERMISSIONS",
             board: "GET_BOARD",
             posts: "GET_POSTS"
-        }),
+        })
     },
     created() {
         this.getPostsOfBoard(this.board.id);
+        this.getGuests(this.board.id);
     }
 };
 </script>
