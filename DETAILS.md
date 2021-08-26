@@ -7,7 +7,7 @@
 Para poder realizar este proyecto y en el transcurso del mismo, tuve que recurrir a varias herramientas y recordar varias configuraciones que había olvidado, primero configurando mi ambiente de desarrollo para despues empezar a la programación correspondiente de la app y su dockerización. 
 Antes de empezar la codificación me centre en la diagramación de mi base de datos la cual mediante un Lucidchart termine realizandola. Esto lo realicé con la finalidad de tener un mayor entendimiento del problema y pensar en qué es un "KudoBoard", despues de su correspondiente diagramación, la cual me ayudo y facilito despues el proceso de la programación, empece con las migraciones, la lógica de la app (Back-end) y la visualización o interfaces (Front-end).
 
-## Mientras realizaba el proyecto me encontre con 2 grandes problemas:
+## Mientras realizaba el proyecto me encontré con 2 grandes problemas:
 
 1. SCRF-TOKEN: El principal problema con este es que no me permitía mandarlo con el encabezado de la consulta a travez de Postman por lo que tuve que buscar e intentar aprender una forma, una de ellas fue usar Postman Interceptor, pero no logré a una solución concreta, es por ello que tuve que para algunas rutas quitar la autentificación para poder probarlas.
 

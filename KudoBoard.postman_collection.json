@@ -1,0 +1,468 @@
+{
+	"info": {
+		"_postman_id": "441da5d8-e034-4380-825d-7ebde254d343",
+		"name": "KudoBoard",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Worker",
+			"item": [
+				{
+					"name": "GET WORKERS",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/worker/store",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"worker",
+								"store"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Board",
+			"item": [
+				{
+					"name": "SHOW BOARD",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/board/show/10",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"board",
+								"show",
+								"10"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ALL BOARDS",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/board/store",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"board",
+								"store"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CREATE BOARD",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-CSRF-TOKEN",
+								"value": "6wynucEaXfZQrwSYkFRaxeW2Z4OjXuCVZH0AXo0p",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json, text/plain, */*",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json;charset=UTF-8",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "X-XSRF-TOKEN",
+								"value": "eyJpdiI6IkNnQ3RDR1E3N1dDekwxK3Z4cmRmT0E9PSIsInZhbHVlIjoiTDZSSE1JcDROTFNoK2cxUEdyR3VuZ2gyZEROWllmYXhQUTF6MmMwaTBQMzlxQ3RBaW92WWM4ZjNpRUUzN2FaRTR6QmozUzZjZmRSYU93UEhFNEhzYXZqSThVZkd5YjMxWFdnMDcxK0FQNXV2S2NmeExRYWJCOFhkQzVIM1g0Qk8iLCJtYWMiOiI0MzE4MjAwMTFmNTVjZGI1M2FkY2NjNDM4NjMxNjcwMDcxODQ0MjQ4ZDkxYjE1MjAwZmUzNjJiOTUyMDE4ZmU1In0=",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"description\": \"Feliz cumple asd amigos\",\r\n\r\n    \"workers\": [1,2,3]\r\n    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/board/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"board",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE BOARD",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"description\": \"asdasdads \",\r\n    \"start_date\":\"2020-05-06\",\r\n    \"end_date\":null,\r\n    \"num_max_guest\" : 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/board/update/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"board",
+								"update",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE BOARD",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/board/delete?board_id=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"board",
+								"delete"
+							],
+							"query": [
+								{
+									"key": "board_id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/web/board/asd",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"web",
+								"board",
+								"asd"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "CREATE",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/web/board/show?board_id=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"web",
+								"board",
+								"show"
+							],
+							"query": [
+								{
+									"key": "board_id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "LOGIN",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": null
+					},
+					"response": [
+						{
+							"name": "LOGIN",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "password",
+										"value": "secret",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"1@1.com\",\r\n    \"password\": \"secret\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "html",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8080"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 24 Aug 2021 16:56:10 GMT"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 24 Aug 2021 16:56:10 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/7.2.34"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/html; charset=UTF-8"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Set-Cookie",
+									"value": "XSRF-TOKEN=eyJpdiI6Iks3dUZBcFpJTmxJQkZteHhMckpFNUE9PSIsInZhbHVlIjoiOVh4Zmk3SnRwSFlYK0ZHRUJuejMzeVRDZU9lTXdaXC9ObUQ0ZnN6NlA1TEl2cmUzaVQwR2RcL25qcSs4NStzeVE5Z3ptMjNocGd3TkEzUEJGYkJta3NsaXdBdFZXY2xXVU51NWZMMGdXRXNUVEt0QUVaWFlmU3lQOTZrSVpTbFZpdiIsIm1hYyI6ImVmMGY4YjQ1ZTJmZjA4YzQ3YjQ0N2ExY2QzOTI0MTY0YjQ3YzkyMmY1YTQ5OWVkNzllMWI2MGU0YzQ0YzFlNDQifQ%3D%3D; expires=Tue, 24-Aug-2021 18:56:10 GMT; Max-Age=7200; path=/"
+								},
+								{
+									"key": "Set-Cookie",
+									"value": "laravel_session=eyJpdiI6IlZmSDlCOXhJV01tdGFuamNYdEFud3c9PSIsInZhbHVlIjoiRkhuZW9NS0Z4Uk5RV3UwWTJPWGZyalV6eVNjRmV5K0FXYU80U1hPUGY0dSs4ZElOeGwyQVk1UzQrYnVpTkhBRXIwM040VGFsOW0yWGxvWWQ3UGFZaFpGMHhQUFgyK3I3UlNaM2pub0ZGMGhuS2RMZjRNMUViblM1UHo5MzBTcUIiLCJtYWMiOiI4YzY2NWMwNzA3YWVjNzcxYjljYmVlMTQyMzFlM2U0NWU5NTdhMTU1ZTZlNDhhOGEzZWE0ZmFlOWYxNWM1YmY3In0%3D; expires=Tue, 24-Aug-2021 18:56:10 GMT; Max-Age=7200; path=/; httponly"
+								}
+							],
+							"cookie": [],
+							"body": "<!doctype html><html lang=\"en\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<!-- CSRF Token -->\n<meta name=\"csrf-token\" content=\"O3QcKYYR2KoERheYAoZV5F5fp7BGMCfJ1przjsgD\">\n<title>Laravel</title>\n<!-- Scripts -->\n<script src=\"http://localhost:8080/js/app.js\" defer></script>\n<!-- Fonts -->\n<link rel=\"dns-prefetch\" href=\"//fonts.gstatic.com\">\n<link href=\"https://fonts.googleapis.com/css?family=Nunito\" rel=\"stylesheet\">\n<!-- Styles -->\n<link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css\" integrity=\"sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l\" crossorigin=\"anonymous\">\n<script src=\"https://code.jquery.com/jquery-3.5.1.slim.min.js\" integrity=\"sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj\" crossorigin=\"anonymous\"></script>\n<script src=\"https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js\" integrity=\"sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns\" crossorigin=\"anonymous\"></script>\n<link href=\"https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons\" rel=\"stylesheet\">\r\n\r\n\r\n\n</head>\n<body>\n    <div id=\"app\">\n        <nav class=\"navbar navbar-expand-md navbar-dark  shadow-sm\" style=\"background-color: #01579B\">\n            <div class=\"container\">\n                <a class=\"navbar-brand\" href=\"http://localhost:8080\">\r\n                    KudoBoard\r\n                </a>\n                <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarSupportedContent\" aria-controls=\"navbarSupportedContent\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n                    <span class=\"navbar-toggler-icon\"></span>\n                </button>\n                <div class=\"collapse navbar-collapse\" id=\"navbarSupportedContent\">\n                    <!-- Left Side Of Navbar -->\n                    <ul class=\"navbar-nav mr-auto\">\r\n\r\n                    </ul>\n                    <!-- Right Side Of Navbar -->\n                    <ul class=\"navbar-nav ml-auto\">\n                        <!-- Authentication Links -->\n                        <li class=\"nav-item\">\n                            <a class=\"nav-link\" href=\"http://localhost:8080/login\">Login</a>\n                        </li>\n                        <li class=\"nav-item\">\n                            <a class=\"nav-link\" href=\"http://localhost:8080/register\">Register</a>\n                        </li>\n                    </ul>\n                </div>\n            </div>\n        </nav>\n        <main class=\"py-4\">\n            <div class=\"container\">\n                <div class=\"row justify-content-center\">\n                    <div class=\"col-md-8\">\n                        <div class=\"card\">\n                            <div class=\"card-header\">Login</div>\n                            <div class=\"card-body\">\n                                <form method=\"POST\" action=\"http://localhost:8080/login\">\n                                    <input type=\"hidden\" name=\"_token\" value=\"O3QcKYYR2KoERheYAoZV5F5fp7BGMCfJ1przjsgD\">\n                                    <div class=\"form-group row\">\n                                        <label for=\"email\" class=\"col-md-4 col-form-label text-md-right\">E-Mail Address</label>\n                                        <div class=\"col-md-6\">\n                                            <input id=\"email\" type=\"email\" class=\"form-control \" name=\"email\" value=\"\" required autocomplete=\"email\" autofocus>\r\n\r\n                                                            \n                                        </div>\n                                    </div>\n                                    <div class=\"form-group row\">\n                                        <label for=\"password\" class=\"col-md-4 col-form-label text-md-right\">Password</label>\n                                        <div class=\"col-md-6\">\n                                            <input id=\"password\" type=\"password\" class=\"form-control \" name=\"password\" required autocomplete=\"current-password\">\r\n\r\n                                                            \n                                        </div>\n                                    </div>\n                                    <div class=\"form-group row\">\n                                        <div class=\"col-md-6 offset-md-4\">\n                                            <div class=\"form-check\">\n                                                <input class=\"form-check-input\" type=\"checkbox\" name=\"remember\" id=\"remember\" >\n                                                <label class=\"form-check-label\" for=\"remember\">\r\n                                        Remember Me\r\n                                    </label>\n                                            </div>\n                                        </div>\n                                    </div>\n                                    <div class=\"form-group row mb-0\">\n                                        <div class=\"col-md-8 offset-md-4\">\n                                            <button type=\"submit\" class=\"btn btn-primary\">\r\n                                    Login\r\n                                </button>\n                                            <a class=\"btn btn-link\" href=\"http://localhost:8080/password/reset\">\r\n                                        Forgot Your Password?\r\n                                    </a>\n                                        </div>\n                                    </div>\n                                </form>\n                            </div>\n                        </div>\n                    </div>\n                </div>\n            </div>\n        </main>\n    </div>\n</body>\n</html>"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Guest",
+			"item": [
+				{
+					"name": "GET GUEST OF BOARD",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/guest/get/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"guest",
+								"get",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CEATE GUEST",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"guest_id\" : 1,\r\n    \"board_id\" : 4\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/guest/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"guest",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE GUEST",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/guest/7",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"guest",
+								"7"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "http://localhost:8080/home",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "sec-ch-ua",
+						"value": "\"Chromium\";v=\"92\", \" Not A;Brand\";v=\"99\", \"Google Chrome\";v=\"92\""
+					},
+					{
+						"key": "sec-ch-ua-mobile",
+						"value": "?0"
+					},
+					{
+						"key": "Upgrade-Insecure-Requests",
+						"value": "1"
+					},
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.159 Safari/537.36"
+					},
+					{
+						"key": "Accept",
+						"value": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/home",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"home"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
