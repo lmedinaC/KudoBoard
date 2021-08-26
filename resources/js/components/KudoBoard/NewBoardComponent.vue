@@ -1,5 +1,5 @@
 <template>
-    <v-dialog :value="newBoard" persistent max-width="550px">
+    <v-dialog :value="newBoard" persistent max-width="550px" scrollable>
         <alert
             :dialog="alert.dialog"
             :tipo="alert.tipo"

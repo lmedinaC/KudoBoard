@@ -1,5 +1,5 @@
 <template>
-    <v-dialog :value="setting" persistent max-width="550px">
+    <v-dialog :value="setting" persistent max-width="550px" scrollable>
         <alert
             :dialog="alert.dialog"
             :tipo="alert.tipo"
@@ -7,7 +7,7 @@
             @close="alert.dialog = false"
         />
         <loader :dialog="loader" />
-        <v-card>
+        <v-card >
             <v-toolbar color="light-blue darken-4" dark class="pa-0">
                 <v-toolbar-title v-html="'Guest list'"></v-toolbar-title>
                 <v-spacer></v-spacer>
