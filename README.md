@@ -1,69 +1,54 @@
-# Automotive Company Project and its dealers, customer module.
+# Proyect Kudoboard 2021
 
+## FUNCTIONS
 
+* Create a KudoBoard for a worker or workers
+* Edit config KudoBoard :
+    
 
 ## REQUIREMENTS
 
-* Composer
-* Laravel
-* Node
-* XAMPP 
-
+* Docker
+* Docker-compose
 
 ## CLONE THE REPOSITORY
 
-In the folder C: \ xampp \ htdocs
+Create a folder in your Desktop 
 Open Command Prompt
 
 ~~~
-: mkdir project
+: mkdir projects
 : cd project
-: git clone https://github.com/lmedinaC/automotive
+: git clone https://github.com/lmedinaC/KudoBoard.git
+: cd KudoBoard
 ~~~
 
-## COMPOSER AND NODE INSTALLATION 
+## DOCKER-COMPOSE  BUILD/UP
 
-In the folder C: \ xampp \ htdocs \ proyect 
+In the Desktop
 Open Command Prompt
 
 ~~~
-:composer install
-:npm install 
-~~~
-
-
-## CONNECTION TO DB
-
-In the folder C: \ xampp \ htdocs \ proyect 
-Create a copy of the .env.example file, with the name .env and modify the following variable 
-
-~~~
-DB_DATABASE=automotriz_db
-~~~
-And run in Command Prompt 
-
-~~~
-: php artisan key:generate
-: php artisan db:create automotriz_db
-: php artisan migrate
-: php artisan db:seed
+: cd project/KudoBoard
+: docker-compose build
+: docker-compose up
 ~~~
 
 
 
 ## RUN PROYECT 
-In the folder C: \ xampp \ htdocs \ proyect 
-Open Command Prompt run
 
-~~~
-:php artisan serve --port=8080
-~~~
-
-And open the navigator to the path:
+Open the navigator to the path:
 
 ~~~
 http://127.0.0.1:8080
-user: adminTest@gmail.com
+
+Like ADMIN
+user: admin@gmail.com
+password: adminTest1234
+
+Like JOCA
+user: jocaTest@gmail.com
 password: adminTest1234
 ~~~
 
