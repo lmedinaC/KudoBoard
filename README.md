@@ -3,7 +3,10 @@
 ## FUNCTIONS
 
 * Create a KudoBoard for a worker or workers
-* Edit config KudoBoard :
+* Edit config KudoBoard (owner of the KudoBoard)
+* Edit Guest list of a KudoBoard (owner of the KudoBoard)
+* Post in a KudoBoard (guest of the KudoBoard)
+* Edist Post in a KudoBoard (Owner of the Post)
     
 
 ## REQUIREMENTS
