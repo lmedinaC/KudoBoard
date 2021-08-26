@@ -55,4 +55,17 @@ user: jocaTest@gmail.com
 password: adminTest1234
 ~~~
 
+## PROBLEMS WITH NODE AND WWW DOESNT RUN
+
+Open the file Dockerfile
+Use notepad++, go to edit -> EOL conversion -> change from CRLF to LF.
+
+Open the folder init-scripts
+open the 2 fiels, apache_start and node_start.sh
+Use notepad++, go to edit -> EOL conversion -> change from CRLF to LF.
+
+
+* Creo que al guardar con git la configuración de estos archivos cambia.
+
+
 Autor: @lmedinaC
