@@ -1,4 +1,4 @@
-# Proyect Kudoboard 2021
+# Project Kudoboard 2021
 
 ## FUNCTIONS
 
